@@ -222,7 +222,7 @@ chmod : Se utiliza para cambiar los premisos de archivo, lo que premite especifi
     5 (otros): Permisos de lectura (4) y ejecución (1) → 4 + 1 = 5.
     Asigna permisos de lectura, escritura y ejecución al propietario, y permisos de lectura y ejecución al grupo y otros usuarios para el archivo archivo.txt.
 
-    ![Tabla de permisos](image.png)
+![Tabla de permisos](image.png)
 
 
 chown : Se utiliza para cambiar el propietario y el grupo de un archivo.
