@@ -249,7 +249,7 @@ ps(estado del proceso): Se utiliza para enumerar los procesos que se estan ejecu
 
 
 
-top(Visualizacion de procesos): Es un visualizador de procesos interactivo y dinámico que actualiza y muestra información de forma continua sobre los procvesos en ejecución.
+top(Visualizacion de procesos): Es un visualizador de procesos interactivo y dinámico que actualiza y muestra información de forma continua sobre los procesos en ejecución.
 
 
     -- Parametros utilies de top.
@@ -269,4 +269,102 @@ top(Visualizacion de procesos): Es un visualizador de procesos interactivo y din
 
 kill(Terminar proceso): Se utiliza para finalizar procesos.
 
+    kill 1234
+    1234 : Es el ID de proceso (PID), de un proceso que quieres terminar.
 
+
+    -- Si el proceso n oresponde a la señal de terminaciòn, puedes usar 'kill' con una señal mas fuerte
+    como 'SIGKILL'.
+
+    kill -9 1234
+
+    -9 : Especifica que se envie la señal 'SIGKILL', que es una señal para terminar el proceso de inmediato, sin darle oportunidad de hacer limpieza o guardar datos.
+
+
+
+
+    killall(Terminar todo proceso): Se utiliza para finalizar procesos por su nombre en lugar de por su 'PID'.
+
+        killall -9 firefox : Finaliza forzosamente todas las instancias en ejecución del anvegar firefox.
+
+
+
+    
+    bg y fg(fondo y primer plano): Se utilizan para administrar trabajos en segundo plano y primer plano.
+
+    bg : Mueve un trabajo detenido o en segundo plano al segundo plano.
+        bg %1 : Mueve el trabajo con ID de trabajo 1 al segundo plano.
+
+    fg : Trae un trabajo de segundo plano al primer plano.
+        fg %1 : Trae el proceso con ID 1 al primer plano.
+
+
+    
+
+    nice y renice: Se utilizan para establecer y ajustar la prioridad de los procesos.
+
+    nice : Se usa para iniciar procesos con una prioridad modificada.
+
+        nice -n 10 command
+
+        command : Es el comando que se desea ejecutar
+        '-n 10' : Especifica que el rpoceso se ejecutará con un valor de 10 (menor prioridad).
+
+    renice : Permite cambiar la prioridad de un proceso con PID.
+
+        renice 10 -p 1234
+
+        Ese comando ajustara el valor de nice del proceso 'PID 1234' a 10(menor prioridad).
+
+        sudo renice -5 -p 1234
+
+        Cambia  el valor de nice del proceso 'PID 1234' a -5, dandole uan mayor prioridad.
+
+
+
+
+    htop(proceso del sistema de monitoreo): Visualizador de procesos interactivo, similar a 'top', pero con funciones adicionales.
+
+
+        htop
+
+        Se visualizara algo asi: 
+
+![alt text](image-1.png)
+
+    %CPU: El uso de la CPU por cada proceso.
+    %MEM: El uso de la memoria RAM por cada proceso.
+    PID: El ID del proceso.
+    VIRT: La memoria virtual utilizada por el proceso.
+    RES: La memoria residente (RAM) utilizada por el proceso.
+    COMMAND: El nombre del proceso.
+
+
+
+strace(Rastreo de llamadas al sistema): Herramienta de diagnóstico que se utiliza para rastrear als llamadas y señales del sistema de un proceso.
+
+    strace -p 1234
+
+    Mostrara todas las llamadas al sistema que esta haciendo el proceso con el 'PID 1234':
+
+![alt text](image-2.png)
+
+    fstat(3, {...}): Muestra información sobre un archivo abierto (en este caso, un archivo con descriptor 3).
+    read(3, "Hello, world!\n", 1024): El proceso está leyendo datos de un archivo (descriptor 3).
+    write(1, "Hello, world!\n", 14): El proceso está escribiendo en la salida estándar (descriptor 1).
+    mmap(...): Muestra una llamada para mapear memoria.
+
+
+    Filtrar llamadas con 'sctrace -p': 
+
+        strace -p 1234 -e trace=read,write
+
+        Mostrara solo las llamadas 'read' y 'write' del proceso: 
+
+        read(3, "Hello, world!\n", 1024)         = 14
+        write(1, "Hello, world!\n", 14)           = 14
+
+
+        Ctrl + c
+
+        Para detener el proceso.
