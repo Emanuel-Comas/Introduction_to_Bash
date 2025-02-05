@@ -235,5 +235,38 @@ chown : Se utiliza para cambiar el propietario y el grupo de un archivo.
 
 
 
+### Listado y gestion de procesos.
+
+
+
+ps(estado del proceso): Se utiliza para enumerar los procesos que se estan ejecutnado actualmente en el sistema.
+
+    ps aux
+
+    a : Muestra información sobre todos los procesos de todos los usuarios.
+    u : Muestra la infromación de manera mas detallada y amigable para el usuario.
+    x : Incluye procesos sin terminar asociados.
+
+
+
+top(Visualizacion de procesos): Es un visualizador de procesos interactivo y dinámico que actualiza y muestra información de forma continua sobre los procvesos en ejecución.
+
+
+    -- Parametros utilies de top.
+    -- Filtra y muestra solo los procesos de un usuario especifico.
+    top -u <usuario>
+    top -u root
+
+    -- Muestra solo los procesos con el ID especificado.
+    top -p 1234
+
+    -- Comandos interactivos de top.
+        h : Muestra ayuda
+        k : Permite matar un proceso introduciendo su PID(Process ID).
+        q : Salir del comando top. 
+
+
+
+kill(Terminar proceso): Se utiliza para finalizar procesos.
 
 
