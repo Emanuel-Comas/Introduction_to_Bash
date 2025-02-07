@@ -365,6 +365,22 @@ strace(Rastreo de llamadas al sistema): Herramienta de diagnóstico que se utili
         write(1, "Hello, world!\n", 14)           = 14
 
 
-        Ctrl + c
+Ctrl + c
 
-        Para detener el proceso.
+Para detener el proceso.
+
+
+
+
+### Tuberia
+
+
+Simbolo de tuberia : '|', se usa para encadenar comandos, se lo conoce como 'pipe'.
+
+    ls | grep 'archivo'
+
+    ls : Lista los archivos en el directorio actual.
+    | : Pasa la salida 'ls' como entrada al comando siguiente.
+    grep 'archivo' : Filtra los resultados para msotrar solo aquellos que contienen la palabra 'archivo'.
+
+-- De este modo, el comando completo listará solo los archivos cuyo nombre contenga la palabra 'archivo'.
