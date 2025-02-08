@@ -384,3 +384,116 @@ Simbolo de tuberia : '|', se usa para encadenar comandos, se lo conoce como 'pip
     grep 'archivo' : Filtra los resultados para msotrar solo aquellos que contienen la palabra 'archivo'.
 
 -- De este modo, el comando completo listará solo los archivos cuyo nombre contenga la palabra 'archivo'.
+
+
+
+
+### Introducción a AWK, GAWK y SED.
+
+
+awk : Es un potente lenguaje de programación deseñado para el escaneo y procesamiento de patrones, 
+permite a los usuarios extraer, manipular y generar informes sobre textos estructurados con facilidad.
+
+
+GAWK: Significa GNU AWK, si bien suenan diferentes, es esencial entender que GAWK es esencialmente una 
+extensión de AWK.
+
+
+
+### Sintaxis básica de AWK
+
+
+Imprimir linea completa: 
+    awk '{print}' entrada.txt
+
+    Simplemente imprime todas las lineas del archivo 'entrada.txt' tal cual están.
+
+
+Imprimir columnas especificas:
+    awk '{print $1, $3}' entrada.txt
+
+    Imprime la primera y tercera columna de cada linea del archivo entrada.txt
+
+
+
+Calcular e imprimir las sumas de las columnas:
+    awk '{sum += $2} END {print "Suma de la columna 2: ", suma}'  input.txt
+
+    Calcula al suma de todos los valores de la segunda columna en el archivo 'input.txt', 
+    y la imprime al final
+
+
+![Ejemplo](image-3.png)
+
+
+
+Filtrar e imprimir lineas según condicion:
+    awk '$3 > 50 {print}' entrada.txt
+
+    Imprimira todas las lineas del archivo 'entrada.txt', donde el valor de 
+    la tercera columna sea mayor a 50.
+
+![Ejemplo_salida](image-4.png)
+
+
+Calcular e imprimir promedio:
+    awk '{sum += $2} END{print "Promedio de la columna 2: ", suma/NR}' input.txt
+
+    Calcula el promedio de los valores en la segunda columna del archivo 'input.txt' y 
+    lo imprime al final
+    El calculo se realiza sumando todos los valores de la segunda columna y dividiendolos por 
+    el numero de registros(lineas)
+    NR : Es crucial para calcular el promedio, ya que proporciona el número total de lineas procesadas.
+
+![Promedio](image-5.png)
+
+
+Lineas de impresión que coinciden con un patrón:
+    awk '/patrón/{print}' entrada.txt
+
+![Patron](image-6.png)
+
+
+
+Concatenar columnas e imrpimir:
+    awk '{print $1, $2 $3}' entrada.txt
+
+
+![concatenacion](image-7.png)
+
+
+
+Impresión condicional con coincidencia de patrones:
+    awk '/patrón/{print $1, $3}' entrada.txt
+
+    Busca lineas en el archivo 'entrada.txt' que coincidan con el patrón especificado, y 
+    luego imprimirá la primera y tercera columna de esas lineas.
+
+
+![alt text](image-8.png)
+
+
+
+Calcular el salario medio:
+    awk -F',' '{total += $3; count++} END {print "Salario promedio:", total/count}' sample_awk.txt
+
+
+    Calcula el salario promedio de lso valores de la tercera columna del archivo 'sample_awk.txt', 
+    asumiendo que las columnas están separadas por coma.
+
+    -F',' : Esto establece la coma (,) como el separador de campo.
+
+    {total += $3; count++} : Esta parte suma los valores de la tercera columna ($3) a la variable 
+    total y cuenta el número de líneas (count).
+
+    END {print "Salario promedio:", total/count}: Esta sección se ejecuta al final, 
+    imprimiendo el salario promedio calculado como la suma de los valores de la tercera 
+    columna dividida por el número de líneas.
+
+
+![alt text](image-9.png)
+
+
+
+
+### Que es SED?.
