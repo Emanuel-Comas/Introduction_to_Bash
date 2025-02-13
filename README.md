@@ -400,7 +400,7 @@ extensión de AWK.
 
 
 
-### Sintaxis básica de AWK
+### Sintaxis básica de AWK.
 
 
 Imprimir linea completa: 
@@ -497,3 +497,328 @@ Calcular el salario medio:
 
 
 ### Que es SED?.
+
+
+sed: Avreviatura de Steam Editor, su proposito principal es realizar transfortmaciònes de texto bàsicas 
+en una secuencia de entradam e imprimir los resulados de la saldia estàndar.
+
+-- Es una herramienta versàtil para la manipulaciòn  de texto y se usa comùnmente en script de shell y
+en one-liners.
+
+
+### Sintaxis básica de SED.
+
+
+Sustituir(reemplazar) texto.
+
+    sed 's/texto_antiguo/texto_nuevo/' entrada.txt
+
+-- Supongamos que en el archivo '.txt' esta el siguiente contenido:
+
+![alt text](image-10.png)
+
+-- Al usar el comando: 
+
+sed 's/casa/departamento/' entrada.txt
+
+-- El resultado seria: 
+
+![alt text](image-11.png)
+
+-- Si se quiere reemplazar todas las ocurrencias de 'casa' en el archivo, se añade la opcion 'g'(global).
+
+    sed '/s/casa/departamento/g' entrada.txt
+
+    -- Este comando reemplaza todas las apariciones de 'casa' por 'departamento' en todo el archivo.
+
+
+
+
+
+Edición en el lugar(modificar archivo):
+
+    sed -i 's/texto_antiguo/texto_nuevo/' entrada.txt
+
+    -i : Hace que la modificación se realice 'in-place', es decir, directamente sobre el archivo 
+    'entrada.txt', sin crear un archivo nuevo. 
+
+    's/texto_antiguo/texto_nuevo/' : Realiza la sustitución de 'texto_antiguo' por 'texto_nuevo'.
+
+    entrada.txt : Es el archivo de entrada en el que se realizará la sustitución.
+
+
+--Supongamos que el archivo 'entrada.txt' contiene:
+
+![alt text](image-12.png)
+
+-- Reemplaza la palabra 'casa' por 'departamento' en el archivo original.
+
+    sed -i 's/casa/departamento/' entrada.txt
+
+El archivo 'entrada.txt' se modifica directamente.
+
+![alt text](image-13.png)
+
+
+-- En caso de querer reemplazar todas las ocurrencias de 'casa' por 'departamento'
+
+    sed -i 's/casa/departamento/g' entrada.txt
+
+
+
+
+
+Imprimir lineas especificas:
+
+    sed -n '2p' entrada.txt
+
+    -n : le indica a SED que no imprima todas las lineas del archivo por defecto.
+
+    '2p' : El '2' especifica la segunda linea, y la 'p' le dice a SED que imprima esa linea.
+
+    entrada.txt : Es el archivo en el que se aplica el comando.
+
+
+-- Supongamos que el archivo 'entrada.txt' contiene:
+
+
+![alt text](image-14.png)
+
+-- Al ejecutar: 
+    sed -n '2p' entrada.txt
+
+-- El resultado será: 
+
+![alt text](image-15.png)
+
+
+
+
+Lineas de impresión que coinciden con un patrón:
+
+    sed -n '/patrón/p' entrada.txt
+
+    -n : le indica a SED que no imprima todas las lineas del archivo por defecto, Solo las lineas que 
+    coincidan con el patrón.
+
+    '/patrón/p' : Expresión regualr que define el patrón que buscas en las lineas del archivo, 
+    el '/p' indica a SED que imprima las lineas que coincidan con ese patrón.
+
+    entrada.txt : Es el archivo de entrada en el que SED buscará el patrón.
+
+
+-- Supongamos que el archivo 'entrada.txt' contiene: 
+
+![alt text](image-16.png)
+
+
+
+-- Y deseas buscar todas las lineas que contengan 'Hola':
+
+    sed -m '/Hola/p' entrada.txt
+
+
+-- La salida seria: 
+
+![alt text](image-17.png)
+
+
+-- Para excluir las lineas que coincidan con un patrón:
+
+    sed -n '/Hola/!p' entrada.txt
+
+    -- Ese comando imprime todas las lineas que no contienen 'Hola'.
+
+
+-- En caso de querer buscar un patrón mas complejo: 
+
+    sed -n '/Ho\w*/p' entrada.txt
+
+    Ho : Es el texto literal que debe comenzar la palabra.
+
+    \w* : Mtacaracter que representa cualquier carácter alfanumérico (letras, números o guion bajo).
+
+    * : significa 'cero o más' de esos caracteres alfanuméricos.
+
+    \w* : Entonces significa cualquier secuencia de caracteres alfanuméricos(o ninguno) que, 
+    siga a 'Ho'
+
+    /p : Indica aa SED que imprima las lineas que coincidan con el patrón.
+
+
+-- Supongamos que el archivo contiene: 
+
+![alt text](image-18.png)
+
+-- Con el comando: 
+
+    sed -n '/Ho\w*/p' entrada.txt
+
+-- La salida es:
+
+![alt text](image-19.png)
+
+
+
+-- Para buscar palabras que comiencen con 'Ho' y terminen con letras, se usa:
+
+    sed -n '/Ho[a-zA-Z]*/p' entarda.txt
+
+-- La salida seria: 
+
+![alt text](image-20.png)
+
+
+
+
+Eliminar lineas que coinciden con un patrón:
+
+    sed '/patrón/d' entrada.txt
+
+    /patrón/ : Expresión regular que define el patrón que se busca.
+
+    d : Acción que se aplica a las lineas que coinciden con el patrón, 'd' significa 'delete', 
+    por lo que elimina las lineas que coincidan con el patrón.
+
+    entrada.txt : Es el archivo en el que se busca el patrón.
+
+
+Supón que el archivo 'archivo.txt' contiene: 
+
+![alt text](image-21.png)
+
+
+
+-- Al ejecutar el comando: 
+
+    sed '/Hola/d' entrada.txt
+
+
+El resuldato seria:
+
+![alt text](image-22.png)
+
+
+-- Linea 1 y 3 son eliminadas al coincidir con el patrón 'Hola'.
+
+
+-- Para eliminar las lineas que contienen 'Hola' directamente en el archivo entrada.txt, 
+sin generar una salida en pantalla ni crear un archivo nuevo:
+
+    sed -i '/Hola/d' entrada.txt
+
+
+-- Para invertir la operación y mantener solo las lineas que 'no contienen' el patrón:
+
+    sed '/Hola/!d' entrada.txt
+
+    -- El comando elimina todas las lineas que 'no contienen' en patrón 'Hola'.
+
+
+
+Añadir texto a lineas especificas:
+
+    sed '2a\Línea de texto adicional' input.txt
+
+    2 : El número antes de la 'a' indica la linea en al que debe realizar la operación.
+
+    a\ : La accion 'a' agrega una nueva linea despues de la linea especificada, después de '\' se 
+    debe colocar el texto que desea agregar.
+
+    Línea de texto adicional : Es el texto que será agregado después de la segunda linea.
+
+    input.txt : Es el archivo de entrada donde se va a modificar el contenido.
+
+
+
+-- Supongamos que 'input.txt' contiene: 
+
+![alt text](image-23.png)
+
+
+-- Con el comando: 
+
+    sed '2a\linea de texto adicional' input.txt
+
+
+-- El resultado es: 
+
+![alt text](image-24.png)
+
+-- La nueva linea 'linea de texto adicional', se agrega después de la segunda linea, pero sin modificar 
+las lineas originales(solo agrega la nueva linea).
+
+
+
+
+Insertar texto antes de lineas especificas:
+
+    sed '2i\Línea de texto insertada' input.txt
+
+    2 : El número antes de la acción 'i' indica que la operación se realizará antes de la segunda línea.
+
+    i\ : La acción 'i' se usa para insertar una nueva línea antes de la línea especificada. Después del '\', debes colocar el texto que deseas insertar.
+
+    Línea de texto insertada : Es el texto que se insertará antes de la segunda línea.
+
+    input.txt : Es el archivo de entrada en el que se realiza la modificación.
+ 
+
+
+-- Supongamos que 'input.txt' contiene: 
+
+![alt text](image-25.png)
+
+-- Al ejecutar:
+
+    sed '2i\Linea de texto insertada' input.txt
+
+-- El resultado seria:
+
+![alt text](image-26.png)
+
+
+2i\ : indica que la nueva línea se insertará antes de la segunda línea del archivo.
+
+Línea de texto insertada : Se coloca antes de la segunda línea del archivo, sin modificar las líneas originales.
+
+
+
+
+Reemplazar linea(s) especifica(s):
+
+    sed '2c\Linea de texto reemplazada' input.txt
+
+    2 : El número antes de la acción 'c' indica la segunda línea, la operación se aplicará a esta línea.
+
+    c\ : La acción 'c' se usa para cambiar(reemplazar) el contenido de la línea especificada con el texto que sigue.
+
+    Linea de texto reemplazada : Es el nuevo texto que reemplazará el contenido de la segunda línea del archivo.
+
+    input.txt : Es el archivo de entrada que se va a modificar.
+
+
+
+-- Supongamos que 'input.txt' contiene: 
+
+![alt text](image-27.png)
+
+
+-- Al ejecutar:
+
+    sed '2c\Linea de texto reemplazada' input.txt
+
+
+-- La salida seria:
+
+![alt text](image-28.png)
+
+
+2c\ : Indica que el contenido de la segunda lina se reemplazará
+
+
+
+
+
+
+### Combinaciónes AWK  y SED.
