@@ -822,3 +822,48 @@ Reemplazar linea(s) especifica(s):
 
 
 ### Combinaciónes AWK  y SED.
+
+La combinaciòn resulta muy eficaz para tareas de procesamiento de texto mas complejo.
+
+
+-- Supongamos que tenemos el archivo 'sample_awk.txt' con el siguiente contenido:
+
+![alt text](image-30.png)
+
+
+awk -F ',''NR == 1{print "\t" $0} NR > 1 {print "empleado: " $0}' sample_awk.txt | sed 's/,/g'
+
+    awk -F : Establece el separador de campos en una coma (,), resulta útil al procesar 
+    archivos CSV (valores separados por coma).
+
+    NR == 1 : Selecciona la primera fila(nombre, edad, puesto).
+
+    {print "\t" $0} : Para la primera linea, inprime una tabulación y dos espacios seguidos de 
+    la linea completa.
+
+    NR > 1: Selecciona lineas con un número de regustro mayor a 1, (es decir, excluye la primera fila).
+
+    {print "empleado: " $0} : Para las lineas después de la primera fila, imprime "empleado:" seguido 
+    de la linea completa.
+    ej:
+
+    {empleado: Juan,30,desarrollador
+    empleado: Maria,28,gerente
+    empleado: Carlos,35,diseñador}
+
+    | : Operador de canalización, toma la salida del comando anterior y la utiliza como entrada para el 
+    siguiente comando.
+
+    sed 's/,/g' : Utiliza el comando SED(editor de flujo), para reemplazar todas las operaciones de coma(,)
+    con espacios.
+    ej:
+
+    {nombre edad puesto
+    empleado: Juan 30 desarrollador
+    empleado: Maria 28 gerente
+    empleado: Carlos 35 diseñador}
+
+
+-- El resultado seria:
+
+![alt text](image-31.png)
