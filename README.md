@@ -396,7 +396,7 @@ permite a los usuarios extraer, manipular y generar informes sobre textos estruc
 
 
 GAWK: Significa GNU AWK, si bien suenan diferentes, es esencial entender que GAWK es esencialmente una 
-extensión de AWK.
+extensión de AWK, que ofrece funciones y extensiones adicionales.
 
 
 
@@ -499,8 +499,8 @@ Calcular el salario medio:
 ### Que es SED?.
 
 
-sed: Avreviatura de Steam Editor, su proposito principal es realizar transfortmaciònes de texto bàsicas 
-en una secuencia de entradam e imprimir los resulados de la saldia estàndar.
+sed: Abreviatura de Steam Editor, su proposito principal es realizar transformaciònes de texto bàsicas 
+en una secuencia de entradam e imprimir los resultados de la salida estàndar.
 
 -- Es una herramienta versàtil para la manipulaciòn  de texto y se usa comùnmente en script de shell y
 en one-liners.
