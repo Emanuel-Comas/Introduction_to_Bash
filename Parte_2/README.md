@@ -211,3 +211,179 @@ Delimitador personalizado:
 
 
 ### Introducción a UNIQ.
+
+
+uniq: Utilidad de linea de comandos de Unix y sistemas operativos similares, diseñada para 
+identificar y eliminar lineas duplicadas en un archivo de texto ordenado o en un flujo de entrada.
+
+
+
+### Sintasis básica.
+
+    uniq [opciones] [archivo_de_entrada [archivo_de_salida]]
+
+    opciones : Bandera para personalizar el comportamiento de uniq.
+
+    archivo_de_entrada : Archivo que procesara uniq, si no se especifica, la entrada se toma de 
+    al entrada estándar.
+
+    archivo_de_salida : Archivo donde se escriben las lineas únicas, si no se especifica, 
+    la salida se dirige a la salida estándar.
+
+    
+-- Ejemplo: 
+
+![alt text](image-8.png)
+
+
+-- archivo_entrada.txt : Archivo de entrada que contiene las lineas duplicadas. 
+-- archivo_salida.txt : Archivo de salida donde se guardarán las lineas sin duplicados.
+
+
+
+
+Eliminar duplicados adyacentes:
+
+    sort data.txt | uniq
+
+    sort data.txt : Ordena el contenido del archivo 'data.txt' en orden alfabético, o númerico.
+
+    uniq : Elimina las lineas duplicadas consecutivas del flujo de entrada, para que 'UNIQ' funcione 
+    correctamente, las lineas duplicadas deben estar contiguas, por eso se usa 'SORT', para ordenar 
+    las lineas.
+
+
+
+Supongamos que el archivo 'data.txt' contiene:
+
+
+![alt text](image-9.png)
+
+
+-- Con el comando:
+
+    sort data.txt | uniq
+
+
+-- El resultado seria:
+
+
+![alt text](image-10.png)
+
+
+-- 'SORT' ordena las lineas de 'data.txt'.
+
+
+
+
+Contar lineas duplicadas:
+
+    sort log.txt | uniq -c
+
+
+    -c : Proporciona un recuento del númerode ocurrencias de cada linea.
+
+
+
+-- Supongamos que el archivo 'log.txt' contiene:
+
+![alt text](image-11.png)
+
+
+
+-- Con el comando:
+
+    sort log.txt | uniq -c
+
+
+-- El resultado seria:
+
+
+![alt text](image-12.png)
+
+
+-- 'SORT' ordena alfabéticamente, lo que hace ordenar el contenido del archivo:
+
+
+![alt text](image-13.png)
+
+
+-- uniq -c : Cuenta cuantas veces aparece cada linea única, la salida muestra el número de veces que 
+aparece cada linea antes de mostrar la linea en si.
+
+
+
+
+
+Ignorar mayúsculas y minúsculas:
+
+    sort names.txt | uniq -i
+
+    -i : Hace que 'UNIQ' no distinga entre mayúsculas y minúsculas.
+
+
+
+-- Supongamos que el archivo 'names.txt' contiene:
+
+
+![alt text](image-14.png)
+
+
+-- Con el comando:
+
+    sort names.txt | uniq -i
+
+
+-- La salida seria:
+
+
+![alt text](image-15.png)
+
+
+-- Primero 'SORT' ordena alfabéticamente, luego 'uniq -i' elimina las lineas duplicadas, pero 
+al ignorar las diferencias entre mayúsculas y minúsculas, 'Alice', 'alice', 'BoB', 'bob', se concideran 
+iguales, por lo que solo aparece una vez cada nombre en la salida.
+
+
+
+
+
+
+
+Mostrar duplicados:
+
+    sort file.txt | uniq -d
+
+    -d : Muestra sólo lineas duplicadas.
+
+
+
+-- Supongamos que el archivo 'file.txt' contiene:
+
+![alt text](image-16.png)
+
+
+
+-- Con el comando:
+
+    sort file.txt | uniq -d
+
+
+
+-- El resultado seria:
+
+
+![alt text](image-17.png)
+
+
+
+-- Primero 'SORT' ordena alfabéticamente, luego 'uniq -d' muestra las lineas que tienen 
+duplicados cosnecutivos.
+
+
+
+
+
+
+
+### Introducción a CUT.
