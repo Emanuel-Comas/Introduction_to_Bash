@@ -387,3 +387,121 @@ duplicados cosnecutivos.
 
 
 ### Introducción a CUT.
+
+
+-- Se utiliza para extraer secciones de cada linea de los archivos de texto de entrada.
+
+
+
+
+### Sintaxis básica.
+
+    cut [opciones] [archivo]
+
+    [opciones] : Personaliza el comportamiento de 'CUT'.
+
+    [archivo] : Archivo del que se extraerán las secciones, si no se especifica la entrada, se toma de 
+    la entrada estándar.
+
+-- Supongamos que un archivo 'datos.txt' contiene:
+
+
+![alt text](image-18.png)
+
+
+-- Para extraer solo los nombres(la primera columna), se puede usar el siguiente comando:
+
+    cut -d ',' -f 1 datos.txt
+
+    -d ',' : Indica que el delimitador es la coma ',', que separa los campos.
+
+    -f 1 : Especifica que quieres la peirmera columna(nombres).
+
+    datos.txt : Archivo de entrada.
+
+
+-- El resultado es:
+
+
+![alt text](image-19.png)
+
+
+
+
+
+
+Especificación de delimitador:
+
+    cut -d ',' -f2,4 csv_data.txt
+
+
+-- Supongamos que el archivo 'csv_data.txt' contiene:
+
+
+![alt text](image-20.png)
+
+
+
+-- Con el comando:
+
+    cut -d ',' -f2,4 csv_data.txt
+
+    -d ',' : Especifica que el delimitador de los campos es al coma ','
+
+    -f2,4 : Indica que quieres obtener la segunda y cuarta columna de cada linea.
+
+    csv_data.txt : Archivo de entrada.
+
+
+
+-- El resultado seria: 
+
+
+![alt text](image-21.png)
+
+
+
+
+
+
+Posición del personaje:
+
+    cut -c1-5 text.txt
+
+    -- En lugar de especificar campos, también puede extraer caracteres según la posición del carácter.
+
+
+
+
+-- Supongamos que el archivo 'text.txt' contiene:
+
+
+![alt text](image-22.png)
+
+
+
+
+-- Con el comando:
+
+    cut -c1-5 text.txt
+
+    -c1-5 : Indica que quieres cortar y mostrar los caracteres desde el primero hasta el quinto de
+    cada linea.
+
+    text.txt : Archivo de entrada.
+
+
+
+-- El resultado seria:
+
+
+
+![alt text](image-23.png)
+
+
+
+
+
+
+
+### Combinación SORT, UNIQ, CUT.
