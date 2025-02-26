@@ -415,7 +415,7 @@ duplicados cosnecutivos.
 
     -d ',' : Indica que el delimitador es la coma ',', que separa los campos.
 
-    -f 1 : Especifica que quieres la peirmera columna(nombres).
+    -f 1 : Especifica que quieres la primera columna(nombres).
 
     datos.txt : Archivo de entrada.
 
@@ -505,3 +505,151 @@ Posición del personaje:
 
 
 ### Combinación SORT, UNIQ, CUT.
+
+
+
+Comando Ordenar, eliminar duplicados y extraer campos:
+
+    cat sample_data.csv | sort | uniq | cut -d ',' -f2,3
+
+
+    cat sample_data.csv : Imprime el contenido del archivo 'sample_data.csv' 
+
+    sort : Toma la salida de 'CAT' y ordena las lineas alfabéticamente, dado que no se especifica
+    que columna ordenar, se ordena por la primera columna(en este caso 'nombre').
+
+    uniq : Elimina las lineas duplicadas consecutivas, despues de 'SORT' las lineas duplicadas estarán
+    juntas, por lo que 'UNIQ' elimina las repeticiones consecutivas.
+
+    cut -d ',' -f2,3 : Se utiliza para seleccionar columnas especificas.
+
+    -d ',' : Le dice a 'CUT' que el delimitador es alcoma ',' .
+
+    -f2,3 : Le indica que queremos la columna 2 y 3 ('edad' y 'ciudad').
+
+
+
+
+-- Supongamos que el archivo 'sample_data.csv' contiene:
+
+
+![alt text](image-24.png)
+
+
+
+-- Con el comando:
+
+    cat sample_data.csv | sort | uniq | cut -d ',' -f2,3
+
+
+-- El resudlato seria:
+
+
+![alt text](image-25.png)
+
+
+
+
+
+
+Contar entradas unicas:
+
+    cut -d ',' -f2 data.csv | sort | uniq -c
+
+
+
+-- Supongamos que el archivo 'data.csv' contiene:
+
+
+![alt text](image-26.png)
+
+
+
+    cut : Se usa para extraer campos especificos de un archivo.
+
+    -d ',' : Especifica que el delimitador es una coma (',') que es comun en los archivos 'CSV'.
+
+    -f2 : Indica que queremos obtener solo el segundo campo(en este caso, la 'edad' de cada persona), de cada 
+    linea en el archivo.
+
+    sort : Toma la salida de 'CUT' y ordena los valores.
+
+    uniq -c : Elimina lineas duplicadas, pero con la opción '-c' ademas de eliminar los duplicados 
+    contará cuántas veces aparece cada valor.
+
+
+
+-- Con el comando:
+
+    cut -d ',' -f2 data.csv | sort | uniq -c
+
+
+
+-- El resultado seria:
+
+
+![alt text](image-27.png)
+
+
+
+-- significa que:
+
+    el valor 25 aparece 2 veces.
+
+    el valor 28 aparece 2 veces.
+
+    el valor 30 aparece 2 veces.
+
+
+
+
+Extraer las N primeras entradas:
+
+    cut -d',' -f3 data.csv | sort | uniq -c | sort -nr | head -n 5
+
+
+
+-- Supongamos que el archivo 'data.csv' contiene:
+
+
+![alt text](image-28.png)
+
+
+
+
+
+-- Con el comando:
+
+    cut -d',' -f3 data.csv | sort | uniq -c | sort -nr | head -n 5
+
+    cut : Se usa para extraer columnas específicas de un archivo.
+
+    -d ',' : Especifica que el delimitador es una coma (',') ya que el archivo es un 'CSV'.
+
+    -f3 : Indica que queremos extraer la tercera columna, en este caso es 'ciudad'.
+
+    sort : Ordena alfabéticamente.
+
+    uniq -c : Elimina lineas duplicadas consecutivas, y con '-c' cuenta cuántas veces aparece 
+    cada ciudad.
+
+    sort -nr : Vuelve a ordenar la salida, pero con forma numérica '-n' y en orden descendente '-r'.
+
+    head -n 5 : Toma las primeras 5 lineas de la salida, en este caso al haber solo 3 ciudad, 
+    simplemente muestra esas 3 ciudades.
+
+
+
+
+-- El resultado seria:
+
+
+![alt text](image-29.png)
+
+
+
+
+
+
+
+### 
