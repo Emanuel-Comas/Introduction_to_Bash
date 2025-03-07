@@ -652,4 +652,4 @@ Extraer las N primeras entradas:
 
 
 
-### 
+### Creación y ejecución de scripts bash.
