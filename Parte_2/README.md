@@ -653,3 +653,76 @@ Extraer las N primeras entradas:
 
 
 ### Creación y ejecución de scripts bash.
+
+Los scripts bash son archivos de texto que contienen una serie de comandos Bash, que se ejecutan en 
+secuencia cuando se ejecuta el script.
+
+
+-- Para crear un script Bash simple, puedes usar un editor de texto como 'nano', 'vim' o incluso 
+un editor gráfico como 'sublime'.
+
+
+-- Creacion de script:
+
+![alt text](image-30.png)
+
+ 
+    nano : Abre el editor de texto que se usara en la terminal, es decir, 'NANO'.
+
+    saludo.sh : Nombre del archivo que deseas editar o crear.
+
+    .sh : Indica que es un archivo script de shell(no es una obligación usar esta extensión, es una 
+    convención.)
+
+
+-- Escribe el siguiente codigo:
+
+
+![alt text](image-31.png)
+
+
+    #!/bin/bash : Es una linea especial que indica que intérprete debe usarse apra ejecutar el script, 
+    en este caso, le dice al sistema que use 'Bash' (el shell de comandos), para ejecutar el script.
+    Es una linea shebang, que es una linea especial que se coloca al principio de un archivo de texto 
+    en sistemas tipo 'Unix' (Linux o macOS), para indicar que intérprete debe usar el sistema para 
+    ejecutar el archivo.
+
+    echo "¡Hola! ¿Cómo te llamas?" : El comando 'echo' se usa para mostrar en la terminal, en este caso, 
+    imprime el texto '¡Hola! ¿Cómo te llamas?', para que el usuario vea el mensaje en pantalla.
+
+    read nombre : El comando 'READ' se usa para leer la entrada del usuario desde la terminal, en este caso, 
+    se está guardando lo que el usuario escriba en al variable 'nombre', la variable 'nombre' almacenará 
+    el nombre que el usuario ingrese.
+
+    echo "¡Hola, $nombre! Bienvenido/a al mundo de Bash." : El '$nombre' dentro de las comillas es una forma 
+    de expansión de variable en 'BASH', significa que el valor almacenado en al variable 'nombre'(que es 
+    lo que el usuario haya ingresado), se insertará dentro del mensaje.
+    EJ: Si el usuario ingresa 'Ema', la salida seria: "¡Hola, Juan! Bienvenido/a al mundo de Bash."
+
+
+
+-- Guarda el archivo presionando 'CTRL + O', luego presiona 'ENTER' para confirmar el nombre del archivo.
+
+-- Sal del editor con 'CTRL + X'
+
+-- Ahora, apra darle permisos de ejecución al script, se ejecuta en la terminal: 
+
+    chmod +x saludo.sh
+
+-- Por ultimo se ejecuta el script: 
+
+    ./saludo.sh
+
+
+    ./ : El prefijo './' indica que el archivo que quieres ejecutar está en el directorio actual, 
+    el sistema no busca por defecto en el directorio actual cuando ejecutas un comando, por eso 
+    es necesario poner './' antes del nombre del archivo para especificar que debe buscar el archivo 
+    en el directorio en el que estas trabajando.
+
+
+    saludo.sh : Es el nombre del archivo que quieres ejecutar, es el script que contiene las 
+    instrucciones en 'BASH'.
+
+
+
+### Variables y entrada.
