@@ -726,3 +726,40 @@ un editor gráfico como 'sublime'.
 
 
 ### Variables y entrada.
+
+Las variables son escenciales para almacenar y manipular datos dentro de lso scripts, y aceptar la entrada 
+del usuario permite que los scripts sean interactivos.
+
+
+    #!/bin/bash
+    echo "What is your name?"
+    read name
+
+    echo "Hello, $name nice to meet you."
+
+    -- Se utiliza el comando 'READ' para capturar el nombre del usuario, que luego se muestra en un mensaje 
+    de saludo.
+
+
+
+Interpolación de variables:
+
+    -- Implica insertar el valor de una variable dentro de una cadena, esto se hace colocando el nombre 
+    de la variable entre comillas dobles y su valor se sustituye cuando se evalúa la cadena.
+
+
+
+    #!/bin/bash
+    name="alex"
+    greeting="Hello, $name How are you?."
+    echo $greeting
+
+
+    -- Aqui, el valor de la variable de nombre se interpola en la cadena de saludo, produciendo un 
+    mensaje personalizado.
+
+
+
+
+
+### Estructura de control.
