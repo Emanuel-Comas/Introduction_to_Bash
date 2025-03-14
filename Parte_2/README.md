@@ -859,7 +859,7 @@ veces.
     echo "Count= $count" : Esta linea imprime el valor actual de la variable 'count', el texto impreso 
     será algo como "Count= 1, Count=2" y asi sucesivamente.
 
-    ((count++)) : Es uan forma de incrementar la variable 'count' en 1 en cada iteración del bucle, 
+    ((count++)) : Es una forma de incrementar la variable 'count' en 1 en cada iteración del bucle, 
     es una opración aritmética que aumenta el valor de 'count' por 1.
     Se hace después de imprimir el valor de 'count', asegurando que la siguiente iteración tenga el valor 
     actualizado de 'count'.
