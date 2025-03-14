@@ -763,3 +763,116 @@ Interpolación de variables:
 
 
 ### Estructura de control.
+
+
+permiten que tus scripts realicen diferentes acciones según condicionales, y las repitan varias 
+veces.
+
+
+
+-- Sentencias condicionales(if, else):
+
+    read -p "How old are you? " age
+
+    if [ $age -ge 18 ]; then
+        echo "You are an adult."
+
+    else
+        echo "You are a minor."
+    fi
+
+
+    read -p "How old are you? " age : Pide al usuario que ingrese su edad, '-p' permite mostrar un 
+    mensaje antes de la entrada del usuario, el valor que ingresa el usuario se almacena en la 
+    variable 'age'.
+
+    if [ $age -ge 18 ]; then : Es un condicional que evalúa si el valor de la variable 'age' es mayor o 
+    igual a 18, el operador '-ge' es una comparación numérica que significa 'mayor o igual que'.
+
+    Importante: En 'BASH', cuando se utilizan corchetes( [ ] ) para las condicionales, es necesario dejar 
+    un espacio después de los corchetes y antes de las variables y los operadores, sino generaria un error.
+
+    echo "You are an adult." : Si se cumple la condición el programa imprimira el mensaje "You are an adult.", 
+    en la terminal.
+
+    else : Si la condición no se cumple, el flujo del programa pasará a la aprte del 'else'.
+
+    echo "You are a minor." : Si el usuario es menor de 18 años, el programa imprimirá el mensaje "You 
+    are a minor."    
+
+    fi : Esta linea cierra la estructura condicional 'if' que se abrió al principio.
+
+
+
+
+-- Bucles(for, while):
+
+    Los bucles se utilizan para ejecutar un conjunto de comandos repetidamente.
+
+    
+    
+-- for : Iteran sobre una lista de elementos.
+
+
+    fruits=("banana", "apple", "pineapple", "durian")
+
+    for fruit in "${fruits[@]}"; do
+        echo "I like $fruit"
+    done
+
+
+    fruits=("banana", "apple", "pineapple", "durian") : Define una lista(array) llamada 'fruits', 
+    con los nombres de varias frutas.
+
+
+    for fruit in "${fruits[@]}"; do : Recorre cada elemento en el array 'fruits', la variable 'fruit' 
+    toma el valor de cada fruta en cada iteración.
+    El '@' tiene un propósito especifico, "${fruits[@]}" significa que estas accediendo a todos los 
+    elementos del array, como argumentos separados, cada elemento del array se maneja como un argumento independiente.
+
+
+    echo "I like $fruit" : Imprime un mensaje que dice "I like [fruta]", para cada fruta en el array.
+
+
+-- La salida seria: 
+
+
+![alt text](image-32.png)
+
+
+
+-- while : Continúan la ejecución mientras uan condición especificada sea verdadera:
+
+    count=1
+
+    while [ $count -le 5 ]; do
+        echo "Count= $count"
+        ((count++))
+    done
+
+
+    count=1 : Aqui se inicializa la variable 'count' con el valor 1.
+
+    while [ $count -le 5 ]; do : Se ejecuta mientras la condición dentro de los corchetes sea verdad, 
+    aqui [ $count -le 5 ] significa 'Mientras count sea menor o igual a 5'.
+
+    echo "Count= $count" : Esta linea imprime el valor actual de la variable 'count', el texto impreso 
+    será algo como "Count= 1, Count=2" y asi sucesivamente.
+
+    ((count++)) : Es uan forma de incrementar la variable 'count' en 1 en cada iteración del bucle, 
+    es una opración aritmética que aumenta el valor de 'count' por 1.
+    Se hace después de imprimir el valor de 'count', asegurando que la siguiente iteración tenga el valor 
+    actualizado de 'count'.
+
+    done : Indica el final del bloque del bucle 'while', despues de ejecutar el código dentro del bucle, 
+    se vuelve a verificar la condición, si es verdadera el bucle continuará, sino, el bucle se detendrá.
+
+
+- La salida seria: 
+
+
+![alt text](image-33.png)
+
+
+
+### Funciones.
