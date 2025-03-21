@@ -868,7 +868,7 @@ veces.
     se vuelve a verificar la condición, si es verdadera el bucle continuará, sino, el bucle se detendrá.
 
 
-- La salida seria: 
+-- La salida seria: 
 
 
 ![alt text](image-33.png)
@@ -876,3 +876,72 @@ veces.
 
 
 ### Funciones.
+
+    
+Permite crear fragmentos de código modulares y reutilizables, ayudan a organizar el script, prommueven la reutilización del codigo y facilita su mantenimiento.
+
+
+-- Creación y uso de funciónes.
+
+    -- En bash son bloques de código que realizan una tarea especifica, se definen mediante la palabra 
+    clave 'function', o simplemente con el nombre de la función seguido de paréntesis.
+    Se puede llamar a una función para ejecutar su código, lo que hace que el script sea mas modular y fácil de entender.
+
+
+    greet() {
+        echo "Hello, welcome to the script!"
+    }
+
+    greet
+
+
+    greet() : El nombre elegido para la función.
+
+    {} : Todo lo que esta dentro de "{}" es el cuerpo de la función
+
+    echo "Hello, welcome to the script!" : Se ejecuta dentro de la función, lo que imprime el texto "Hello, welcome to the script!" en la consola cuando se llama a la función.
+
+
+    greet : Aqui se llama a la función 'greet', al ser llamada, imprime el mensaje "Hello, welcome to the script!" en la consola.
+
+
+
+
+Otro ejemplo seria:
+
+    add() {
+        local result=$(($1 + $2))
+        echo $result
+    }
+
+    sum=$(add 5 3)
+    echo "The sum is: $sum"
+
+
+    add() : El nombre elegido para la función.
+
+    local result=$(($1 + $2)) : La función toma 2 parametros, '$1 y $2', que son el primer y segundo argumento, el resultado se almacena en la variable local 'result'.
+
+    local : Se utiliza para declarar 'result' como variable local, lo que significa que solo estará 
+    disponible dentro de la función.
+
+    echo $result : Después de calcular la suma, la función imprime el valor de 'result'.
+
+    
+    sum=$(add 5 1) : Aqui se llama a la función 'add', ásando lso argumentos '5 y 3'.
+
+    -- El resultado de la fucnión(la suma de 5 y 3) se asigna a la variable 'sum' usando '$()'(La 
+    sustitución de comandos), esto significa que el valor retornado por 'add'(el valor de 'result'), se almacena en 'sum'.
+
+
+    echo "The sum is: $sum" : Finalmente se imprime el resultado almacenado en 'sum', que es 8.
+
+-- La salida seria: 
+
+
+![alt text](image-34.png)
+    
+
+
+
+### Conceptos de funciónes avanzadas.
