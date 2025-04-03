@@ -945,3 +945,166 @@ Otro ejemplo seria:
 
 
 ### Conceptos de funciónes avanzadas.
+
+-- Variables locales y globales en funciones.
+
+    #!/bin/bash
+
+    # Se define la variable global.
+    global_var="Hi, i am global variable."
+
+    # Definición de función
+    function sample (){
+
+        # Definición de variable local.
+        local local_var="Hi, i am local variable."
+
+        # Mostrando las variables dentro de la función.
+        echo "Inside function $local_var"
+        echo "Inside function $global_var"
+    }
+
+    # Llamada a la función.
+    
+    sample
+
+    # Intento de acceder a la variable local fuera de la función.
+    echo "Inside function $local_var" # Da error, la variable local solo es accesibl dentro de la función.
+    
+    # Accediendo a la variable global fuera de la función.
+    echo "Inside function $global_var" # Imprime el valor de la variable global.
+
+
+
+-- Dentro de la función.
+
+    local_var : Es local, significa que solo existe dentro de esa función.
+    global_var : Es global, significa que se puede acceder a ella tanto dentro como fuera de la función.
+
+
+-- Fuera de la función.
+
+    local_var : Fuera de la función dara error, porque las variables locales solo están disponibles dentro 
+    de la función donde se definieron.
+
+    global_var : Acceder desde fuera de la función es válido y se imprimira su valor, ya que es una variable 
+    global.
+
+
+-- El resultado seria:
+
+    Dentro de la función: Hi, i am a lcoal variable. 
+    Dentro de la función: Hi, i am a global variable.
+
+    Fuera de la funcion : # Da error.
+    Fuera de la funcion : Hi, i am a global variable.
+
+
+
+### Parametros.
+
+    #!/bin/bash
+
+    # Definición de función.
+    function greet(){
+        # Definición de variable local 'greeting'.
+        local greeting="Hello"
+
+        # Se asigna el primer argumento a la varaible local 'name'.
+        local name=$1
+
+        # Se imrpime el saludo con la variable 'name'.
+        echo "$greeting, $name!"
+
+    }
+
+    # Llamada a la función con diferentes nombres.
+    greet "Malik"
+    greet "Josh"
+    greet "Alex"
+
+
+-- Definición de la función 'greet':
+
+    local greeting='Hello' : Declara unavariable local 'greeting' con el valor 'Hello'.
+
+    local name=$1 : Asigna el primer argumento que se pasa a la función ($1) a la variable local 'name'.
+
+    echo "$greeting, $name!" :  Muestra el saludo, combinando la variable 'greeting' y el nombre pasado como 
+    argumento.
+
+
+-- Llamada a la fucnión 'greet':
+
+    greet "Malik" : La función se ejecuta con el argumento 'Malik', por lo que el saludo será "Hello Malik".
+
+    greet "Josh" : La función se ejecuta con el argumento 'Josh', por lo que el saludo será "Hello Josh".
+
+    greet "Alex" : La función se ejecuta con el argumento 'Alex', por lo que el saludo será "Hello Alex".
+
+
+-- Salida esperada:
+
+
+![alt text](image-35.png)
+
+
+
+
+-- Funciónes recursivas:
+
+    #!/bin/bash
+
+    # Declaración del array.
+    # Los array se separan por un 'espacio' no por una 'coma' en BASH.
+    names=("Marta" "Bob" "Lucas" "Dora")
+
+    function greet_people(){
+
+        # Se verifica si el array esta vacio.
+        if [ ${#names[@]} -eq 0 ]; then
+            echo "All greeting completed."
+
+        else
+            current_name="${names[0]}"
+            echo "Hello, $current_name!"
+            
+            # Elimina el primer nombre del array.
+            names=("${names[@]:1}")
+
+            # Se vuelve a llamar a si misma la función.
+            greet_people
+        fi
+    }
+
+    # Llamada a la función.
+    greet_people
+
+
+-- Función 'greet_people':
+
+    ${#names[@]} : Devuelve el núnmero de elementos en el array, si es 0 el array esta vacio, se imprime 
+    "All greeting completed.".
+    Si no esta vacio, toma el primer nombre del array, lo guarda en la variable 'current_name' y lo imprime.
+
+
+    names=("${names[@]:1}") : Elimina el primer elemento del array y guarda el array modificado en 'names'.
+
+    Finalmente la función se llama a si misma (Recursión), asegurando que el proceso se repita hasta que el 
+    array este vacio.
+
+
+-- Llamada a la función, iniciando todo el proceso.
+    
+    greet_people
+
+
+-- la salida seria:
+
+
+![alt text](image-36.png)
+
+
+
+
+### Manejo de errores de función y códigos de salida.
