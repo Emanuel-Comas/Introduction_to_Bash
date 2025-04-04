@@ -1108,3 +1108,149 @@ Otro ejemplo seria:
 
 
 ### Manejo de errores de función y códigos de salida.
+
+-- Mecanismos de gestión de errores dentro de las funciónes.
+
+    #!/bin/bash
+
+    function divide() {
+        local dividend=$1
+        local divisor=$2
+
+        if [ $divisor -eq 0 ]; then
+            echo "Error: Cannot be divided by zero."
+        fi
+
+        local result=$(($dividend / $divisor))
+        # Imprime el resultado.
+        echo "Result: $result"
+    }
+
+    # Llamada a la función.
+    divide 10 2
+    divide 20 0
+
+
+
+
+    dividend : Toma el primer argumento con ($1) que se pasa a al función (es el dividendo).
+
+    divisor : Toma el segundo argumento con ($2) que se pasa a al función (es el divisor).
+
+    [ $divisor -eq 0 ] : Verifica si el divisor es igual a 0 (-eq significa 'es igual a').
+
+    local result=$(($dividend / $divisor)) : Si no se detecta que el divisor es 0, se realiza la división, 
+    y se guarda el resultado en la variable 'result'.
+
+    $(()) : Este operador se utiliza para operaciónes aritméticas.
+
+    echo "Result: $result" : Imprime el resultado.
+
+    divide 10 2 : Llamada a la función, el resultado es 5.
+    divide 20 0 : Llamada a la función, imprime "Error: Cannot be divided by zero."
+
+
+
+
+
+-- Códigos de salida y estado de las funciónes:
+
+
+    #!/bin/bash
+
+    function check_file() {
+        local filename=$1
+
+        if [ -e "$filename" ]; then
+            echo "File '$filename' exists."
+            # Si el archivo existe retorna 0.
+            return 0
+        else
+            echo "File '$filename' not found."
+            # Si el archivo no existe retorna 1
+            return 1
+        fi
+    }
+
+    echo -n "Look a file: "
+    read user_input
+
+    if [ -z "$user_input" ]; then
+        echo "You must provide a filename."
+    else
+        # Llamada a la función. 
+        check_file "$user_input"
+    fi
+
+
+
+    if [ -e "$filename" ]; then : Verifica si el archivo existe, la variable esta entre comillas para evitar 
+    problemas con nombres de archivo que contengas espacios.
+
+    echo -n : Muestra el mensaje 'Look a file: ' sin saltos de linea, permitiendo que la entrada del usuario 
+    aparezca en la misma linea.
+
+    if [ -z "$user_input" ]; then : Comprueba si el usuario no ingresó nada, si esta vacio se imprime 
+    "You must provide a filename.".
+
+
+-- Ejemplos de ejecucio.
+
+-- Caso 1: El archivo existe: 
+
+
+![alt text](image-37.png)
+
+
+-- Caso 2: El archivo no existe: 
+
+
+![alt text](image-38.png)
+
+
+-- Caso 3: El usuario no proporciona ninguna entrada:  
+
+
+![alt text](image-39.png)
+
+
+
+
+
+-- Atrapando señales en funciónes:
+
+
+    #!/bin/bash
+
+    function cleanup() {
+        echo "Cleaning up..."
+    }
+    trap cleanup EXIT.
+
+    function simulate_error() {
+
+        echo "Simulating an error..."
+        return 1
+    }
+
+    simulate_error
+
+
+
+    trap cleanup EXIT : Esto le dice al script que ejecute la función 'cleanup()' cuando el script termine, 
+    ya sea porque llegó al final o debido a un error, 'EXIT' es el evento qeu se dispara cuando termina el 
+    script, es decir, 'TRAP' asegura que 'cleanup()' siempre se ejecute al final del script.
+
+    simulate_error : Simula un error al imprimir "Simulating an error" y devuelve 1, que en la mayoria de los 
+    sistemas Unix/Linux indica que ocurrió un error.
+
+
+-- Ejemplo de salida:
+
+
+![alt text](image-41.png)
+
+
+
+
+### Técnicas de función avanzadas.
