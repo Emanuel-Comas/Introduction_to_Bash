@@ -1254,3 +1254,64 @@ Otro ejemplo seria:
 
 
 ### Técnicas de función avanzadas.
+
+-- Alcance de variables en funciónes anidadas.
+
+
+    #!/bin/bash
+
+    outer_function() {
+        # Se define uan variable local.
+        local outer_variable="I´m from outer function."
+
+        # Dentro de 'outer_function', se define otra función.
+        inner_function() {
+            local inner_variable="I´m inner function."
+            echo "$inner_variable"
+            echo "$outer_variable"
+        }
+
+        inner_function
+    }
+
+    outer_function
+
+
+    inner_function : la función imprime 'inner_variable' y luego intetna imprimir outer_variable (que fue 
+    definida en la función externa 'outer_function').
+
+    La función 'inner_function' es llamada dentro de 'outer_function', lo que produce que ambas variables 
+    ($inner_variable y la otra $outer_variable), se impriman.
+
+
+
+-- Nombres de funciónes dinámicas.
+
+
+
+    #!/bin/bash
+
+    for i in {1..3}; do
+        function_name="dynamic_function_$i"
+        eval "$function_name() { echo 'this is a $function_name'; }"
+    done
+
+    # Al ser llamada la función recibe '2' como parametro.
+    dynamic_function_2
+
+
+    for i in {1..3}; do : Al recibir como parametro '2', se generan las funciones 'dynamic_function_1', 
+    'dynamic_function_2' y 'dynamic_function_3'.
+
+    function_name="dynamic_function_$i" : Tiene como objetivo crear dinámicamente una función de 'BASH', cuyo nombre es generado en tiempo de ejecución.
+    Si 'i' es 1, entonces function_name será "dynamic_function_1", si es 2, será "dynamic_function_2", y asi 
+    sucesivamente.
+
+    eval "$function_name() { echo 'this is a $function_name'; }" : 'EVAL' toma el texto dentro de las 
+    comillas y lo ejecuta como código.
+
+    La cadena completa seria: dynamic_function_1() { echo 'this is a dynamic_fucntion_1'; },
+    dynamic_function_1() { echo 'this is a dynamic_fucntion_2'; y dynamic_function_1()  { echo 'this is a dynamic_fucntion_3'; }}.
+
+    Por ejemplo, dynamic_fucntion_1 imprimira: 'this is a dynamic_function_1'.
+    Notemos que la variable '$function_name' no se evalúa como variable bash dentro de las comillas simples, es decir, no se imprime el valor, solo el texto 'this is a dynamic_function_1'.
